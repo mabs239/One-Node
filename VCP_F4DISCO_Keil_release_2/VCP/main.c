@@ -49,9 +49,48 @@ uint8_t EdgeDefAngle[6]={330,30,90,150,210,270}; /////yet to be modified (Akif)
 /////Can be better approximated (Hakeem)
 uint8_t false_exti,timefirst=0;
 long int result=0;
+
+void printArray();
+//void printArray2D(int m, int n,double a[m][n]);
+//void printArray2D(int m, int n,double **a);
+							/**********************************************************************/
+							/* Add code to view results in debug window														*/
+							/*																																		*/
+							/**********************************************************************/
+							 // Add ITM Port register definitions to the source code.
+
+							#define ITM_Port8(n)    (*((volatile unsigned char *)(0xE0000000+4*n)))
+							#define ITM_Port16(n)   (*((volatile unsigned short*)(0xE0000000+4*n)))
+							#define ITM_Port32(n)   (*((volatile unsigned long *)(0xE0000000+4*n)))
+
+							#define DEMCR           (*((volatile unsigned long *)(0xE000EDFC)))
+							#define TRCENA          0x01000000
+
+							//Add an fputc function to the source code that writes to the ITM Port 0 register. The fputc function enables printf to output messages.
+
+							struct __FILE { int handle; /* Add whatever is needed */ };
+							FILE __stdout;
+							FILE __stdin;
+
+							int fputc(int ch, FILE *f) {
+								if (DEMCR & TRCENA) {
+									while (ITM_Port32(0) == 0);
+									ITM_Port8(0) = ch;
+								}
+								return(ch);
+							}
+
+							//Add a debugging trace messages using printf.
+							//printf("AD value = 0x%04X\r\n", AD_value);
+
+							/**********************************************************************/
+							/* Above code is useful for debug printf function.										*/
+							/**********************************************************************/
+
+
 void USART_puts(USART_TypeDef* USARTx, volatile int s) /// Dosri file (Usart)
 {
-	// wait until data register is empty
+		// wait until data register is empty
 		while( !(USARTx->SR & 0x00000040) ); 
 		USART_SendData(USARTx,s);
 }
@@ -497,8 +536,48 @@ void Init_Recv_Node(){
 	halRfWriteRfSettings(CC1101_TYPE_SEND);
 }
 
+void printArray(double a[], int len){
+	int i = 0;
+	printf("\r\n");
+	for(i=0;i<len;i++){
+		printf(" %f ",a[i]);
+	}
+	printf("\r\n");
+}
+
+
+void printArray2D(int m, int n,double a[3][3]){
+	int i = 0, j = 0;
+	printf("\r\n");
+	for(i=0;i<m;i++){
+			for(j=0;j<n;j++){
+				printf(" %f ",a[i][j]);
+			}
+			printf("\r\n");
+	}
+	printf("\r\n");
+}
+
+
 int main(void) {
 	__IO uint32_t i = 0;
+
+		double a[] = {1, 2, 3};	
+		double b[] = {1, 2, 3};
+		double k[3][3] = {{2,3,7.0},{9,4,5},{5,2,3}};
+		double c[100];
+		double d[3][3];
+		
+		printf("Pakistan");
+		
+		//void arrayS_Mult(double array1[],double array2[], double result[],int size)
+		//void Matrix_sum(double array1[],double array2[],double result[groups][groups],int size)
+
+		arrayS_Mult(a,b, c,3);
+		printArray(c,3);
+		Matrix_sum(a,b,d,3);
+		printArray2D(3,3,d);
+		
 	time_var1=0;
 	STM_EVAL_LEDInit(LED6);
 	STM_EVAL_LEDInit(LED4);
@@ -509,3 +588,6 @@ int main(void) {
 	while(1)	{	}	
   return 0;
 }
+
+
+

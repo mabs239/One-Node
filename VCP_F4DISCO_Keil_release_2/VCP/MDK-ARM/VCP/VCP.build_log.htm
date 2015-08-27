@@ -43,11 +43,17 @@ compiling main.c...
   uint8_t EdgeDefAngle[6]={330,30,90,150,210,270}; /////yet to be modified (Akif)
 ..\main.c(48): warning:  #69-D: integer conversion resulted in truncation
   uint8_t EdgeDefAngle[6]={330,30,90,150,210,270}; /////yet to be modified (Akif)
-..\main.c(510): warning:  #111-D: statement is unreachable
+..\main.c(53): warning:  #1295-D: Deprecated declaration printArray - give arg types
+  void printArray();
+..\main.c(576): warning:  #223-D: function "arrayS_Mult" declared implicitly
+                arrayS_Mult(a,b, c,3);
+..\main.c(578): warning:  #223-D: function "Matrix_sum" declared implicitly
+                Matrix_sum(a,b,d,3);
+..\main.c(589): warning:  #111-D: statement is unreachable
     return 0;
-..\main.c(511): warning:  #1-D: last line of file ends without a newline
-  }
-..\main.c: 8 warnings, 0 errors
+..\main.c(567): warning:  #177-D: variable "k" was declared but never referenced
+                double k[3][3] = {{2,3,7.0},{9,4,5},{5,2,3}};
+..\main.c: 11 warnings, 0 errors
 compiling cc1101.c...
 ..\cc1101.h(53): warning:  #1295-D: Deprecated declaration Recieve - give arg types
   void Recieve();
@@ -74,6 +80,13 @@ compiling cc1101.c...
 ..\cc1101.c(197): warning:  #177-D: variable "send_num" was declared but never referenced
   static unsigned char send_num=0;
 ..\cc1101.c: 12 warnings, 0 errors
+compiling functions.c...
+..\functions.c(35): warning:  #77-D: this declaration has no storage class or type specifier
+  svm_predict(struct Model a , double sample[
+_size]);
+..\functions.c(57): warning:  #550-D: variable "pred" was set but never used
+        double p[groups],pred[groups];
+..\functions.c: 2 warnings, 0 errors
 compiling usb_core.c...
 compiling misc.c...
 compiling stm32f4xx_adc.c...
@@ -116,9 +129,9 @@ compiling usbd_cdc_vcp.c...
   void Send();
 ..\usbd_cdc_vcp.c: 1 warning, 0 errors
 linking...
-Program Size: Code=13760 RO-data=560 RW-data=424 ZI-data=12192  
+Program Size: Code=16736 RO-data=680 RW-data=428 ZI-data=12196  
 FromELF: creating hex file...
-".\VCP\VCP.axf" - 0 Error(s), 22 Warning(s).
+".\VCP\VCP.axf" - 0 Error(s), 27 Warning(s).
 </pre>
 </body>
 </html>
