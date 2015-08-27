@@ -1,0 +1,2 @@
+# One-Node
+One-node is a project for STM32F4 Discovery board project. It localizes the impulsive audio sound event. Each discovery board takes analog input from tree spatialy distributed microphones. Each mic is fitted at vertex of a 30cm isosceles triangle. It helps find the angle of acoustic source within 2-degree accuracy. Multiple one-node boards when connected as Wireless Sensor Network(WSN) locate the sound source position on google map.
