@@ -52,6 +52,11 @@ int main()
 }
 */
 
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 svm_predict(struct Model a, double sample[f_size])
 {
 	double p[groups],pred[groups];
@@ -106,18 +111,32 @@ svm_predict(struct Model a, double sample[f_size])
 	}
 }
 
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 void array_Mult(double array[f_size],double x,double result[f_size],int size)
 {
 	int i;
 	for(i = 0; i<size;i++)
 			result[i] = array[i] * x;
 }
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 void array_add(double array[f_size],double x,double result[f_size])
 {
 	int i;
 	for(i=0;i<f_size;i++)
 			result[i] = array[i] + x;
 }
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 double array_sum(double array[f_size])
 {
 	int i;
@@ -127,6 +146,11 @@ double array_sum(double array[f_size])
 return result;
 }
 
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 void array_square(double array[f_size],double result[f_size])
 {
 	int i;
@@ -160,6 +184,10 @@ void Matrix_sum(double array1[],double array2[],double result[groups][groups],in
 	}
 }
 
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 void array_int_sum(double array[],double a,double result[],int size)
 {
 	int l;
@@ -169,6 +197,10 @@ void array_int_sum(double array[],double a,double result[],int size)
 	}
 }
 
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 double gaussianKernel(double x1,double x2,double sigma)
 {
 	double t,d,sim;
@@ -180,6 +212,10 @@ double gaussianKernel(double x1,double x2,double sigma)
 	return sim;
 }
 
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 void Matrix(double array1[] , double array2[], double result[groups][groups],int size)
 {
 	int i;
@@ -189,6 +225,10 @@ void Matrix(double array1[] , double array2[], double result[groups][groups],int
 	}
 }
 
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 void Matrix_int_sum(double array[groups][groups],double a,double result[groups][groups],int size)
 {
 	int i,j;
@@ -201,6 +241,10 @@ void Matrix_int_sum(double array[groups][groups],double a,double result[groups][
 	}
 }
 
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
 void Mat_array_mult(double mat[groups][groups],double array[],double result[groups][groups],int size)
 {
 	int i,j;
