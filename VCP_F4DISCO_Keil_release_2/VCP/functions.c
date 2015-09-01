@@ -6,7 +6,7 @@
 
 
 #define f_size 2
-#define groups 220
+#define groups 28
 #define sig 2
 
 
@@ -19,6 +19,9 @@ struct Model
     double alphas [groups];
 		char kernelFunction[] ;
 };
+
+
+
 
 void array_Mult(double array[f_size],double x,double result[f_size],int size);
 void array_add(double array[f_size],double x,double result[f_size]);
@@ -62,8 +65,7 @@ svm_predict(struct Model a, double sample[f_size])
 	double p[groups],pred[groups];
 	int l;
 
-	if(strcmp (a.kernelFunction , "gaussianKernel") == 1)
-	{
+	
 		double X1,X2[groups];
 		int i,j;
 		double K[groups][groups],KernelOut;
@@ -100,7 +102,7 @@ svm_predict(struct Model a, double sample[f_size])
 			p[j] = array_sum(K[j]);
 		}
 		
-	}
+	
 
 	for(l=0;l<groups;l++)
 	{
@@ -143,7 +145,7 @@ double array_sum(double array[f_size])
 	double result=0;
 	for(i=0;i<f_size;i++)
 		result = result+array[i];
-return result;
+	return result;
 }
 
 
