@@ -57,5 +57,4 @@
 .\vcp\main.o: ..\time_nwn.h
 .\vcp\main.o: ..\three_adcs_nwn.h
 .\vcp\main.o: ..\uart.h
-.\vcp\main.o: ..\functions.c
-.\vcp\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\vcp\main.o: ..\helpingFunctions.h

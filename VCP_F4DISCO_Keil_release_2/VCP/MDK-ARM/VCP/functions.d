@@ -36,3 +36,4 @@
 .\vcp\functions.o: ..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\vcp\functions.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\vcp\functions.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\vcp\functions.o: ..\helpingFunctions.h
