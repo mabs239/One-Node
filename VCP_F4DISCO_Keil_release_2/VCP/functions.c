@@ -13,7 +13,8 @@
 
 struct Model
 {
-    int w,b;
+    double w[2];
+		double b;
     double X [groups] [f_size];
     double y[groups];
     double alphas [groups];

@@ -1,0 +1,58 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# HEAD detached at 6f67e05
+# Changes to be committed:
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/STM32F4-Discovery_VCP.dep
+#	new file:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/VCP.axf
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/VCP.build_log.htm
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/VCP.hex
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/VCP.htm
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/VCP.map
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/cc1101.o
+#	deleted:    VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/functions.__i
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/functions.crf
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/functions.o
+#	deleted:    VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/main.__i
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/main.crf
+#	new file:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/main.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/misc.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4_discovery.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_adc.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_can.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_crc.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_dac.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_dbgmcu.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_dcmi.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_dma.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_exti.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_flash.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_fsmc.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_gpio.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_iwdg.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_pwr.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_rcc.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_rng.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_rtc.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_sdio.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_spi.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_syscfg.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_tim.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_usart.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32f4xx_wwdg.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/stm32fxxx_it.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/system_stm32f4xx.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usb_bsp.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usb_core.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usb_dcd.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usb_dcd_int.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usbd_cdc_core.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usbd_cdc_vcp.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usbd_core.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usbd_desc.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usbd_ioreq.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usbd_req.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/MDK-ARM/VCP/usbd_usr.o
+#	modified:   VCP_F4DISCO_Keil_release_2/VCP/main.c
+#
+
