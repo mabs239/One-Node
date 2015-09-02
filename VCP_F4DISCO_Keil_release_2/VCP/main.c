@@ -576,7 +576,7 @@ int modelLength = 28;
 struct Model
 {
     double w[f_size];
-		const double b = 0.0345;
+		double b;
     double X [groups] [f_size];
     double y[groups];
     double alphas [groups];
@@ -593,7 +593,7 @@ int main(void) {
 		double d[3][3];
 		
 		struct Model m1;
-		m1.X = X1;
+
 		
 
 		
