@@ -35,7 +35,7 @@ void Matrix_int_sum(double array[groups][groups],double a,double result[groups][
 double gaussianKernel(double x1,double x2,double sigma);
 void Matrix(double array1[] , double array2[], double result[groups][groups],int size);
 void Mat_array_mult(double mat[groups][groups],double array[],double result[groups][groups],int size);
-svm_predict(struct Model a , double sample[f_size]);
+void svm_predict(struct Model a , double sample[f_size]);
 
 
 

@@ -4,7 +4,6 @@
 ".\vcp\stm32fxxx_it.o"
 ".\vcp\main.o"
 ".\vcp\cc1101.o"
-".\vcp\functions.o"
 ".\vcp\usb_core.o"
 ".\vcp\misc.o"
 ".\vcp\stm32f4xx_adc.o"

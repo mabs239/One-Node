@@ -19,10 +19,53 @@
 #define Corr_Result_Size (2*Samples)-1
 #define Fs  45000
 #define Vs  333
+
+
+
+const int f_size = 2;
+const int groups = 28;
+
+
+struct Model
+{
+    double w [f_size];
+		double b;
+    double X [groups] [f_size];
+    double y[groups];
+    double alphas [groups];
+};
+
+void array_Mult(double array[f_size],double x,double result[f_size],int size);
+void array_add(double array[f_size],double x,double result[f_size]);
+void array_square(double array[f_size],double result[f_size]);
+void arrayS_Mult(double array1[],double array2[], double result[],int size);
+double  array_sum(double array[f_size]);
+void arrayS_sum(double array1[],double array2[],double result[],int size);
+void Matrix_sum(double array1[],double array2[],double result[groups][groups],int size);
+void array_int_sum(double array[],double a,double result[],int size);
+void Matrix_int_sum(double array[groups][groups],double a,double result[groups][groups],int size);
+double gaussianKernel(double x1,double x2,double sigma);
+void Matrix(double array1[] , double array2[], double result[groups][groups],int size);
+void Mat_array_mult(double mat[groups][groups],double array[],double result[groups][groups],int size);
+void svm_predict(struct Model a , double sample[f_size]);
+
+
+
 __ALIGN_BEGIN USB_OTG_CORE_HANDLE     USB_OTG_dev  __ALIGN_END ;
 volatile uint32_t time_var1;
 unsigned char ADC0_Out_8,ADC1_Out_8,ADC2_Out_8;
 volatile int ADC0_Out,ADC1_Out,ADC2_Out;
+
+
+/* Define Model parameters*/
+double X1[] ={0.579000344, 0.796917226, 0.422056676, 0.237648833, 0.968937944, 0.770653925, 0.484163008 , 0.213185483	,0.219116214	,0.003703923	,0.000113883	,9.42E-05	,2.30E-06	,1.16E-06	,1.75E-07	,1.04E-08,	1.695387474,	2.271354862,	0.452291288,	0.227607391,	2.077405125,	2.313796625,	2.512395494,	2.580537307,	2.71198118,	2.506749483,	2.895398071	,2.110320158};
+double X2[] ={	0.157368421,	0.108947368,	0.104736842	,0.092105263,	0.075263158,	0.078421053,	0.076315789,	0.075263158,	0.051052632	,0.092105263,	0.05,	0.042631579	,0.045789474,	0.056315789	,0.022631579,	0.028421053,	0.058421053	,0.079473684,	0.092105263,	0.074210526,	0.134210526,	0.219473684,	0.171052632,	0.23,	0.120526316	,0.235263158,	0.118421053,	0.184736842};
+double y[] = {	1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,-1,	-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1};
+double alpha[] = {	0.454251936	,0.321773341,	11.7139214,	7.945854578	,0.855086621,	0.447928742,	10.27969317,	5.47384088,	7.444460018,	0.473481755,	1.39E-17,	2.17E-17,	2.95E-17,	5.21E-16,	0.417961766,	0.000917648,	1.011944606	,0.644913297,	20	,20,	0.668406582,	0.631434696,	0.325245149,	0.375024182	,0.703681435,	0.309626792,	0.8806807,	0.278214418};
+double w[] = {-10.93210935, -0.325816793};
+double b = 0.0116;
+int modelLength = 28;
+
 
 int index=0,Sig_index=0,Noise_Index=0,delay_index;
 uint32_t Noise_0=0,Noise_1=0,Noise_2=0,sum0=0,sum1=0,sum2=0;
@@ -560,58 +603,306 @@ void printArray2D(int m, int n,double a[3][3]){
 	printf("\r\n");
 }
 
-/* Define Model parameters*/
-double X1[] ={0.579000344, 0.796917226, 0.422056676, 0.237648833, 0.968937944, 0.770653925, 0.484163008 , 0.213185483	,0.219116214	,0.003703923	,0.000113883	,9.42E-05	,2.30E-06	,1.16E-06	,1.75E-07	,1.04E-08,	1.695387474,	2.271354862,	0.452291288,	0.227607391,	2.077405125,	2.313796625,	2.512395494,	2.580537307,	2.71198118,	2.506749483,	2.895398071	,2.110320158};
-double X2[] ={	0.157368421,	0.108947368,	0.104736842	,0.092105263,	0.075263158,	0.078421053,	0.076315789,	0.075263158,	0.051052632	,0.092105263,	0.05,	0.042631579	,0.045789474,	0.056315789	,0.022631579,	0.028421053,	0.058421053	,0.079473684,	0.092105263,	0.074210526,	0.134210526,	0.219473684,	0.171052632,	0.23,	0.120526316	,0.235263158,	0.118421053,	0.184736842};
-double y[] = {	1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,-1,	-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1};
-double alpha[] = {	0.454251936	,0.321773341,	11.7139214,	7.945854578	,0.855086621,	0.447928742,	10.27969317,	5.47384088,	7.444460018,	0.473481755,	1.39E-17,	2.17E-17,	2.95E-17,	5.21E-16,	0.417961766,	0.000917648,	1.011944606	,0.644913297,	20	,20,	0.668406582,	0.631434696,	0.325245149,	0.375024182	,0.703681435,	0.309626792,	0.8806807,	0.278214418};
-double w[] = {-10.93210935, -0.325816793};
-double b = 0.0116;
-int modelLength = 28;
 
 
-#define f_size 2
-#define groups 28
 
-struct Model
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void svm_predict(struct Model a, double sample[f_size])
 {
-    double w[f_size];
-		double b;
-    double X [groups] [f_size];
-    double y[groups];
-    double alphas [groups];
-		char kernelFunction[] ;
-};
+	
+	double p[groups],pred[groups];
+	int l;
+
+	
+		double X1,X2[groups];
+		int i,j;
+		double K[groups][groups],KernelOut;
+		double temp[f_size],temp2[groups],temp3[f_size],chuss[groups][groups]; //temp = sample.^2; temp2 = -2*sample*model.X'
+		//array_square(sample,temp);
+		
+		
+		X1 = array_sum(temp);
+		
+		for(i=0;i<groups;i++)																		// this will add the square of all the features and put them
+		{																												// in X2[i]
+			array_square(a.X[i],temp);
+			X2[i] = array_sum(temp);
+		}
+		for(i=0;i<groups;i++)
+		{
+			arrayS_Mult(sample,a.X[i],temp3,f_size);					// temp3 = sample*model.X[i] i.e multiplication of samples with column of model.X
+			temp2[i] = -2*array_sum(temp3);
+		}
+		Matrix_sum(X2, temp2,chuss,groups);
+		Matrix_int_sum(chuss,X1,K,groups);
+		
+		KernelOut = gaussianKernel(1,1,2);
+		for(i=0;i<groups;i++)
+		{
+			for(j=0;j<groups;j++)
+			{
+				K[i][j] = pow(KernelOut,K[i][j]);
+			}
+		}
+		Mat_array_mult(K,a.y,K,groups);
+		Mat_array_mult(K,a.alphas,K,groups);
+		
+		for(j=0;j<groups;j++)
+		{
+			p[j] = array_sum(K[j]);
+		}
+		
+	
+
+	for(l=0;l<groups;l++)
+	{
+		if(p[l]>=0)
+			pred[l] = 1;
+		else
+			pred[l] = 0;
+	}
+}
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void array_Mult(double array[f_size],double x,double result[f_size],int size)
+{
+	int i;
+	for(i = 0; i<size;i++)
+			result[i] = array[i] * x;
+}
+
+
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void array_add(double array[f_size],double x,double result[f_size])
+{
+	int i;
+	for(i=0;i<f_size;i++)
+			result[i] = array[i] + x;
+}
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+double array_sum(double array[f_size])
+{
+	int i;
+	double result=0;
+	for(i=0;i<f_size;i++)
+		result = result+array[i];
+	return result;
+}
+
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void array_square(double array[f_size],double result[f_size])
+{
+	int i;
+	for(i=0;i<f_size;i++)
+		result[i] = array[i] * array[i];
+}
+
+
+/**********************************************************************/
+/* Simple Multiply: One to One element Multiplication									*/
+/*																																		*/
+/**********************************************************************/
+void arrayS_Mult(double array1[],double array2[], double result[],int size)
+{
+	int i;
+	for(i=0;i<size;i++)
+		result[i] = array1[i] * array2[i];
+}
+
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void Matrix_sum(double array1[],double array2[],double result[groups][groups],int size)
+{
+	int j;
+	for(j=0;j<size;j++)
+	{
+		array_int_sum(array2,array1[j],result[j],groups);
+	}
+}
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void array_int_sum(double array[],double a,double result[],int size)
+{
+	int l;
+	for(l=0;l<size;l++)
+	{
+		result[l] = array[l] + a;
+	}
+}
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+double gaussianKernel(double x1,double x2,double sigma)
+{
+	double t,d,sim;
+	t = (x1 - x2);
+	t = -1*t*t;
+	d = 2*sigma*sigma;
+	sim = exp(t/d);
+	
+	return sim;
+}
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void Matrix(double array1[] , double array2[], double result[groups][groups],int size)
+{
+	int i;
+	for(i=0;i<size;i++)
+	{
+		array_Mult(array2,array1[i],result[i],size);
+	}
+}
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void Matrix_int_sum(double array[groups][groups],double a,double result[groups][groups],int size)
+{
+	int i,j;
+	for(i=0;i<size;i++)
+	{
+		for(j=0;j<size;j++)
+		{
+			result[i][j] = array[i][j]+a;
+		}
+	}
+}
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+void Mat_array_mult(double mat[groups][groups],double array[],double result[groups][groups],int size)
+{
+	int i,j;
+	for(i=0;i<groups;i++)
+	{
+		for(j=0;j<groups;j++)
+		{
+			result[i][j] = mat[i][j] * array[i];
+		}
+	}
+}
+
+
+
+
+
+
+
 
 int main(void) {
 	__IO uint32_t i = 0;
-
-		double a[] = {1, 2, 3};	
-		double b[] = {1, 2, 3};
-		double k[3][3] = {{2,3,7.0},{9,4,5},{5,2,3}};
-		double c[100];
-		double d[3][3];
-		
+		double xSample[] = {0.7,0.7};
 		struct Model m1;
-
 		
-
+		double mX1;
+		double mX2[groups];
 		
+		int idx;
+		for (idx=0; idx<groups; idx++){
+			m1.alphas[idx] = alpha[idx];
+			m1.y[idx] = alpha[idx];
+			m1.X[idx][0] = X1[idx];
+			m1.X[idx][1] = X2[idx];
+		}	
+		m1.w[0] = w[0]; m1.w[1] = w[1];
+		m1.b = b;
 		
 		printf("Bismillah Hir Rahman Nir Raheem \n");
+		
+		//svm_predict(m1, xSample);
+		
+		//X1 = sum(X.^2, 2)
+		mX1 = xSample[0]*xSample[0]+xSample[1]*xSample[1];
+		printf("mX1 = %f",mX1);
+		
+		
+    //X2 = sum(model.X.^2, 2)'
+		for(i=0;i<groups;i++)																		// this will add the square of all the features and put them
+		{																												// in X2[i]
+			mX2[i] = m1.X[i][0] * m1.X[i][0] + m1.X[i][1] * m1.X[i][1];
+		}
+		printArray(mX2,groups);
+		
+		
 		
 		
 		//void arrayS_Mult(double array1[],double array2[], double result[],int size)
 		//void Matrix_sum(double array1[],double array2[],double result[groups][groups],int size)
-		printArray(X1,modelLength);
-		printArray(X2,modelLength);
-		printArray(y,modelLength);
-		printArray(alpha,modelLength);
 
-		arrayS_Mult(a,b, c,3);
-		printArray(c,3);
-		Matrix_sum(a,b,d,3);
-		printArray2D(3,3,d);
 		
 	time_var1=0;
 	STM_EVAL_LEDInit(LED6);
@@ -623,6 +914,8 @@ int main(void) {
 	while(1)	{	}	
   return 0;
 }
+
+
 
 
 
