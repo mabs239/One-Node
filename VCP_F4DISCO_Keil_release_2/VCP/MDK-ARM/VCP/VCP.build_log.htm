@@ -39,16 +39,16 @@ compiling main.c...
   uint8_t getExtiFlag();
 ..\usbd_cdc_vcp.h(78): warning:  #1295-D: Deprecated declaration Send - give arg types
   void Send();
-..\main.c(91): warning:  #69-D: integer conversion resulted in truncation
+..\main.c(95): warning:  #69-D: integer conversion resulted in truncation
   uint8_t EdgeDefAngle[6]={330,30,90,150,210,270}; /////yet to be modified (Akif)
-..\main.c(91): warning:  #69-D: integer conversion resulted in truncation
+..\main.c(95): warning:  #69-D: integer conversion resulted in truncation
   uint8_t EdgeDefAngle[6]={330,30,90,150,210,270}; /////yet to be modified (Akif)
-..\main.c(96): warning:  #1295-D: Deprecated declaration printArray - give arg types
+..\main.c(100): warning:  #1295-D: Deprecated declaration printArray - give arg types
   void printArray();
-..\main.c(658): warning:  #550-D: variable "pred" was set but never used
-        double p[groups],pred[groups];
-..\main.c(915): warning:  #111-D: statement is unreachable
-    return 0;
+..\main.c(743): warning:  #111-D: statement is unreachable
+                return 0;
+..\main.c(676): warning:  #177-D: variable "idx" was declared but never referenced
+                int idx;
 ..\main.c: 9 warnings, 0 errors
 compiling cc1101.c...
 ..\cc1101.h(53): warning:  #1295-D: Deprecated declaration Recieve - give arg types
@@ -118,7 +118,7 @@ compiling usbd_cdc_vcp.c...
   void Send();
 ..\usbd_cdc_vcp.c: 1 warning, 0 errors
 linking...
-Program Size: Code=16792 RO-data=576 RW-data=1124 ZI-data=12196  
+Program Size: Code=21516 RO-data=812 RW-data=1324 ZI-data=12196  
 FromELF: creating hex file...
 ".\VCP\VCP.axf" - 0 Error(s), 23 Warning(s).
 </pre>
