@@ -75,5 +75,5 @@ typedef struct
 
 #endif /* __USBD_CDC_VCP_H */
 
-void Send();
+//void Send();
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

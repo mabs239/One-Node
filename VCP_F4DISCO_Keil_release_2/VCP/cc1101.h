@@ -50,7 +50,7 @@ void	CC1101_POWER_RESET(void);
 void CC1101_Send_Main(uint16_t Angle31);
 void CC1101_Receive_Main(void);
 void halRfWriteRfSettings(CC1101_TYPE type);
-void Recieve();
-uint8_t getFlagID();
-uint8_t getExtiFlag();
+//void Recieve();
+//uint8_t getFlagID();
+//uint8_t getExtiFlag();
 #endif

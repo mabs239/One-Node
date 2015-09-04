@@ -50,5 +50,8 @@ void	CC1101_POWER_RESET(void);
 void CC1101_Send_Main(void);
 void CC1101_Receive_Main(void);
 void halRfWriteRfSettings(CC1101_TYPE type);
+
+
 void Recieve();
 #endif
+

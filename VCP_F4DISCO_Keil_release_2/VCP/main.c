@@ -12,6 +12,9 @@
 #include "three_adcs_nwn.h"
 #include "uart.h"
 #include "math.h"
+
+#include "HelperFunctions.h"
+
 #define Rise_Const 12
 #define Fall_Const 2
 #define Samples 500
@@ -20,10 +23,6 @@
 #define Fs  45000
 #define Vs  333
 
-
-
-const int f_size = 2;
-const int groups = 28;
 
 
 struct Model
@@ -47,6 +46,13 @@ void Matrix_int_sum(double array[groups][groups],double a,double result[groups][
 double gaussianKernel(double x1,double x2,double sigma);
 void Matrix(double array1[] , double array2[], double result[groups][groups],int size);
 void Mat_array_mult(double mat[groups][groups],double array[],double result[groups][groups],int size);
+
+void printArray(double a[], int len);
+//void Recieve();
+//uint8_t getFlagID();
+//uint8_t getExtiFlag();
+
+
 void svm_predict(struct Model a , double sample[f_size]);
 
 
@@ -58,17 +64,6 @@ volatile int ADC0_Out,ADC1_Out,ADC2_Out;
 
 
 /* Define Model parameters*/
-double modelX[f_size][groups] ={{0.579000344, 0.796917226, 0.422056676, 0.237648833, 0.968937944, 0.770653925, 0.484163008 , 0.213185483	,0.219116214	,0.003703923	,0.000113883	,9.42E-05	,2.30E-06	,1.16E-06	,1.75E-07	,1.04E-08,	1.695387474,	2.271354862,	0.452291288,	0.227607391,	2.077405125,	2.313796625,	2.512395494,	2.580537307,	2.71198118,	2.506749483,	2.895398071	,2.110320158},
-{	0.157368421,	0.108947368,	0.104736842	,0.092105263,	0.075263158,	0.078421053,	0.076315789,	0.075263158,	0.051052632	,0.092105263,	0.05,	0.042631579	,0.045789474,	0.056315789	,0.022631579,	0.028421053,	0.058421053	,0.079473684,	0.092105263,	0.074210526,	0.134210526,	0.219473684,	0.171052632,	0.23,	0.120526316	,0.235263158,	0.118421053,	0.184736842}};
-
-
-//double X1[] ={0.579000344, 0.796917226, 0.422056676, 0.237648833, 0.968937944, 0.770653925, 0.484163008 , 0.213185483	,0.219116214	,0.003703923	,0.000113883	,9.42E-05	,2.30E-06	,1.16E-06	,1.75E-07	,1.04E-08,	1.695387474,	2.271354862,	0.452291288,	0.227607391,	2.077405125,	2.313796625,	2.512395494,	2.580537307,	2.71198118,	2.506749483,	2.895398071	,2.110320158};
-//double X2[] ={	0.157368421,	0.108947368,	0.104736842	,0.092105263,	0.075263158,	0.078421053,	0.076315789,	0.075263158,	0.051052632	,0.092105263,	0.05,	0.042631579	,0.045789474,	0.056315789	,0.022631579,	0.028421053,	0.058421053	,0.079473684,	0.092105263,	0.074210526,	0.134210526,	0.219473684,	0.171052632,	0.23,	0.120526316	,0.235263158,	0.118421053,	0.184736842};
-double modelY[] = {	1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,1	,-1,	-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1	,-1};
-double modelAlphas[] = {	0.454251936	,0.321773341,	11.7139214,	7.945854578	,0.855086621,	0.447928742,	10.27969317,	5.47384088,	7.444460018,	0.473481755,	1.39E-17,	2.17E-17,	2.95E-17,	5.21E-16,	0.417961766,	0.000917648,	1.011944606	,0.644913297,	20	,20,	0.668406582,	0.631434696,	0.325245149,	0.375024182	,0.703681435,	0.309626792,	0.8806807,	0.278214418};
-double modelW[] = {-10.93210935, -0.325816793};
-double modelB = 0.0116;
-int modelLength = 28;
 
 
 int index=0,Sig_index=0,Noise_Index=0,delay_index;
@@ -88,16 +83,18 @@ float Floating_Part;
 char Angle_Str[6] = {'A','N','G','L','E','='};
 uint32_t var;
 int Temp=0;
-uint8_t Edge_Angle1,Edge_Angle2,Edge_Angle3,Region_Angle1,Region_Angle2,Region_Angle3,Angle3_Invalid;
-uint8_t Edge_Angle1,Edge_Angle2,Edge_Angle3,Region_Angle12,Region_Angle23,Region_Angle31;
-uint8_t Angle2_Invalid,Angle1_Invalid,Angle12_Invalid,Angle31_Invalid,Angle23_Invalid;
-uint8_t Region,Edge;
-uint8_t EdgeDefAngle[6]={330,30,90,150,210,270}; /////yet to be modified (Akif)
+
+int Edge_Angle1,Edge_Angle2,Edge_Angle3,Region_Angle1,Region_Angle2,Region_Angle3,Angle3_Invalid;
+int Edge_Angle1,Edge_Angle2,Edge_Angle3,Region_Angle12,Region_Angle23,Region_Angle31;
+int Angle2_Invalid,Angle1_Invalid,Angle12_Invalid,Angle31_Invalid,Angle23_Invalid;
+int Region,Edge;
+int EdgeDefAngle[6]={330,30,90,150,210,270}; /////yet to be modified (Akif)
+
 /////Can be better approximated (Hakeem)
 uint8_t false_exti,timefirst=0;
 long int result=0;
 
-void printArray();
+
 //void printArray2D(int m, int n,double a[m][n]);
 //void printArray2D(int m, int n,double **a);
 							/**********************************************************************/
@@ -141,13 +138,15 @@ void USART_puts(USART_TypeDef* USARTx, volatile int s) /// Dosri file (Usart)
 		while( !(USARTx->SR & 0x00000040) ); 
 		USART_SendData(USARTx,s);
 }
+
 void Make_Receiver(){
-	    halRfWriteRfSettings(CC1101_TYPE_RECEIVE);
-		  CC1101_Receive_Main();
+	  halRfWriteRfSettings(CC1101_TYPE_RECEIVE);
+		CC1101_Receive_Main();
 }
+
 void Make_Transmitter(){
-	   halRfWriteRfSettings(CC1101_TYPE_SEND);
-	   TIM_ITConfig(TIM5, TIM_IT_Update, ENABLE);
+	  halRfWriteRfSettings(CC1101_TYPE_SEND);
+	  TIM_ITConfig(TIM5, TIM_IT_Update, ENABLE);
 }
 
 void EXTI15_10_IRQHandler(void){	  
@@ -166,9 +165,11 @@ void EXTI15_10_IRQHandler(void){
 		}
 	}
 }
+
 void Startup_Delay(){
 	index++;
 }
+
 void Noise_Eval(){
   Temp=ADC0_Out_8;
   if(Temp > Noise_0)  {
@@ -573,7 +574,6 @@ void TIM3_IRQHandler(void) //Timer Interupt for sending data
     Get_Adc_Value();		 
 		Start_Processing();  
 	}
-		
 }
 
 void Init_Recv_Node(){
@@ -585,95 +585,15 @@ void Init_Recv_Node(){
 	halRfWriteRfSettings(CC1101_TYPE_SEND);
 }
 
-void printArray(double a[], int len){
-	int i = 0;
-	printf("\r\n");
-	for(i=0;i<len;i++){
-		printf(" %e ",a[i]);
-	}
-	printf("\r\n");
-}
-
-
-void printArray2D(int m, int n,double a[3][3]){
-	int i = 0, j = 0;
-	printf("\r\n");
-	for(i=0;i<m;i++){
-			for(j=0;j<n;j++){
-				printf(" %f ",a[i][j]);
-			}
-			printf("\r\n");
-	}
-	printf("\r\n");
-}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**********************************************************************/
-/* 																																		*/
-/*																																		*/
-/**********************************************************************/
-double gaussianKernel(double x1,double x2,double sigma)
-{
-	double t,d,sim;
-	t = (x1 - x2);
-	t = -1*t*t;
-	d = 2*sigma*sigma;
-	sim = exp(t/d);
-	
-	return sim;
-}
 
 int main(void) {
 	__IO uint32_t i = 0, j =0;
 		double X[] = {.7,0.7};
 		double X1;
 		double X2[groups], temp[groups];
-		int idx;
 		double p = 0;
 		
 		/*
@@ -726,9 +646,14 @@ int main(void) {
 		}
 		
 		printArray(temp,groups);
+		printf("Decision Variable = %e \n", p);
+		
+		if(p > 0)
+			printf("Gunshot Detected \n");
+		else
+			printf("Noise Signal \n");
 
-		printf("Decision Variable = %e", p);
-
+		printf("Result of addition: %i",add239(3,4));	
 		time_var1=0;
 		STM_EVAL_LEDInit(LED6);
 		STM_EVAL_LEDInit(LED4);

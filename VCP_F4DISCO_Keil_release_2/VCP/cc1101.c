@@ -3,6 +3,7 @@
 #include "stm32f4_discovery.h"
 #include "main.h"
 
+
 #define   Dummy_Byte			0xff
 
 #define 	WRITE_BURST     		0x40		/* 连续写入							*/
@@ -194,7 +195,7 @@ const RF_SETTINGS rfSettings = {
 	0xff // PKTLEN Packet length.
 };
 
-static unsigned char send_num=0;
+//static unsigned char send_num=0;
 
 /*******************************************************************************
 * Function Name  : CC1101_Init()
@@ -557,11 +558,11 @@ uint8_t halSpiReadStatus(uint8_t addr)
 uint8_t halRfReceivePacket(uint8_t *rxBuffer, uint8_t *length) 
 {
 	uint8_t status[2];
-	uint8_t packetLength;
-	uint8_t address;
-	uint8_t i=(*length)*4;  /*/ 具体多少要根据datarate和length来决定*/
+//	uint8_t packetLength;
+//	uint8_t address;
+//	uint8_t i=(*length)*4;  /*/ 具体多少要根据datarate和length来决定*/
 
-	static uint32_t j=0;
+//	static uint32_t j=0;
 	
 	halSpiStrobe(CCxxx0_SRX, CC1101_TYPE_RECEIVE);		/*/进入接收状态*/
   
@@ -649,8 +650,8 @@ uint8_t rxBuf[9] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 void CC1101_Send_Main(uint16_t Angle31)
 {
-  uint8_t num=0;	
-	uint8_t tf =0;	
+//  uint8_t num=0;	
+//	uint8_t tf =0;	
 
 	if (Angle31 > 255)
 	{
@@ -673,7 +674,7 @@ txBuf[3] = 0;
 
 void CC1101_Receive_Main(void)
 {
-	uint8_t i;
+//	uint8_t i;
 	
 	
 	halSpiWriteBurstReg(CCxxx0_PATABLE, PaTabel, 8, CC1101_TYPE_RECEIVE);

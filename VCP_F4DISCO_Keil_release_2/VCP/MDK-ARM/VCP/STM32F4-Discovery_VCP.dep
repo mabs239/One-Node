@@ -117,7 +117,7 @@ I (..\usbd_def.h)(0x4FC5A06E)
 I (..\usbd_conf.h)(0x4F6B029E)
 I (..\usbd_cdc_core.h)(0x4F6B0284)
 I (..\usbd_ioreq.h)(0x4FC5A06E)
-F (..\main.c)(0x55E8118D)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\main.o --omf_browse .\vcp\main.crf --depend .\vcp\main.d)
+F (..\main.c)(0x55E95B0C)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\main.o --omf_browse .\vcp\main.crf --depend .\vcp\main.d)
 I (C:\Keil_v5\ARM\Inc\ST\STM32F4xx\stm32f4xx.h)(0x53BA6D44)
 I (..\..\..\Libraries\CMSIS\Include\core_cm4.h)(0x50CF169E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C26FE8)
@@ -153,9 +153,9 @@ I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x50EE89
 I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x50EE8974)
 I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x50EE8974)
 I (..\main.h)(0x523C30DE)
-I (..\cc1101.h)(0x53678A35)
+I (..\cc1101.h)(0x55E91EAE)
 I (..\stm32f4_discovery.h)(0x5010E442)
-I (..\usbd_cdc_vcp.h)(0x52174BF0)
+I (..\usbd_cdc_vcp.h)(0x55E91F2B)
 I (..\usbd_cdc_core.h)(0x4F6B0284)
 I (..\usbd_ioreq.h)(0x4FC5A06E)
 I (..\usbd_def.h)(0x4FC5A06E)
@@ -172,11 +172,12 @@ I (..\GDO2_Interrupt.h)(0x53550D64)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C26FE8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C26FE8)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x54C26FE8)
-I (..\time_nwn.h)(0x53578BFA)
+I (..\time_nwn.h)(0x55E937F4)
 I (..\three_adcs_nwn.h)(0x52AED3B2)
 I (..\uart.h)(0x5246710E)
-F (..\cc1101.c)(0x5370918B)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\cc1101.o --omf_browse .\vcp\cc1101.crf --depend .\vcp\cc1101.d)
-I (..\cc1101.h)(0x53678A35)
+I (..\HelperFunctions.h)(0x55E95B26)
+F (..\cc1101.c)(0x55E92B2E)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\cc1101.o --omf_browse .\vcp\cc1101.crf --depend .\vcp\cc1101.d)
+I (..\cc1101.h)(0x55E91EAE)
 I (..\stm32f4_discovery.h)(0x5010E442)
 I (C:\Keil_v5\ARM\Inc\ST\STM32F4xx\stm32f4xx.h)(0x53BA6D44)
 I (..\..\..\Libraries\CMSIS\Include\core_cm4.h)(0x50CF169E)
@@ -213,6 +214,10 @@ I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x50EE89
 I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x50EE8974)
 I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x50EE8974)
 I (..\main.h)(0x523C30DE)
+F (.\HelperFunctions.c)(0x55E95BCF)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\helperfunctions.o --omf_browse .\vcp\helperfunctions.crf --depend .\vcp\helperfunctions.d)
+I (HelperFunctions.h)(0x55E92DA0)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x54C26FE8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C26FE8)
 F (..\usb_core.c)(0x4FCA4D6A)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\usb_core.o --omf_browse .\vcp\usb_core.crf --depend .\vcp\usb_core.d)
 I (..\usb_core.h)(0x4FC597EA)
 I (..\usb_conf.h)(0x5010E0A2)
@@ -569,7 +574,7 @@ I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x50EE8974
 I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x50EE8974)
 I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x50EE8974)
 I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x50EE8974)
-F (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.c)(0x50EE8972)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\stm32f4xx_flash.o --omf_browse .\vcp\stm32f4xx_flash.crf --depend .\vcp\stm32f4xx_flash.d)
+F (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.c)(0x55E94003)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\stm32f4xx_flash.o --omf_browse .\vcp\stm32f4xx_flash.crf --depend .\vcp\stm32f4xx_flash.d)
 I (..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h)(0x50EE8974)
 I (C:\Keil_v5\ARM\Inc\ST\STM32F4xx\stm32f4xx.h)(0x53BA6D44)
 I (..\..\..\Libraries\CMSIS\Include\core_cm4.h)(0x50CF169E)
@@ -1493,7 +1498,7 @@ I (..\usb_defines.h)(0x4FC597EA)
 I (..\usbd_desc.h)(0x4FC59392)
 I (..\usbd_req.h)(0x4FC5A06E)
 F (..\usbd_cdc_vcp.c)(0x52174C42)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\ -I..\..\..\Libraries\CMSIS\Include -I..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\..\..\Utilities\STM32F4-Discovery -I..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\ST\STM32F4xx-D__UVISION_VERSION="515" -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -DUSE_STM32F4_DISCOVERY -DUSE_USB_OTG_FS -DHSE_VALUE="8000000" -DSTM32F40_41xxx-o .\vcp\usbd_cdc_vcp.o --omf_browse .\vcp\usbd_cdc_vcp.crf --depend .\vcp\usbd_cdc_vcp.d)
-I (..\usbd_cdc_vcp.h)(0x52174BF0)
+I (..\usbd_cdc_vcp.h)(0x55E91F2B)
 I (C:\Keil_v5\ARM\Inc\ST\STM32F4xx\stm32f4xx.h)(0x53BA6D44)
 I (..\..\..\Libraries\CMSIS\Include\core_cm4.h)(0x50CF169E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C26FE8)

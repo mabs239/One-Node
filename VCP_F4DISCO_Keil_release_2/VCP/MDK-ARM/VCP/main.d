@@ -57,3 +57,4 @@
 .\vcp\main.o: ..\time_nwn.h
 .\vcp\main.o: ..\three_adcs_nwn.h
 .\vcp\main.o: ..\uart.h
+.\vcp\main.o: ..\HelperFunctions.h
