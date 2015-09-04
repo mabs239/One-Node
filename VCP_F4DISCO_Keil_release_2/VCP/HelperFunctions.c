@@ -80,3 +80,67 @@ void printArray2D(int m, int n,double a[3][3])
 	printf("\r\n");
 }
 
+
+
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+int svmPredict(double X[])
+{
+		int i = 0, j =0;
+		//double X[] = {.7,0.7};
+		double X1;
+		double X2[groups], temp[groups];
+		double p = 0;
+		
+		
+		printf("Bismillah Hir Rahman Nir Raheem \n");
+		for(j=0; j < f_size ; ++j)
+			X1 = X1 + X[j]*X[j];
+		
+		printf("mX1 = %f",X1);
+				
+		p = 0;
+		for(i=0; i<groups; ++i){
+			temp[i] = 0;
+			for(j=0; j < f_size ; ++j)
+			{
+				//X2 = sum(model.X.^2, 2)'
+				X2[i] += modelX[j][i] * modelX[j][i];
+				
+				//K1 = - 2 * X * model.X'
+				temp[i] += X[j] * modelX[j][i];
+			}
+			
+			//K2 = bsxfun(@plus, X2, K1)
+			temp[i] = -2 * temp[i] + X2[i];// + X1;//K3
+			
+			//K3 = bsxfun(@plus, X1, K2)
+			temp[i] = temp[i] + X1;
+			
+			//K4 = model.kernelFunction(1, 0) .^ K3
+			temp[i] = pow(gaussianKernel(1,0,.1), temp[i]);
+			
+			//K5 = bsxfun(@times, model.y', K4)
+			temp[i] = modelY[i] * temp[i];
+			
+			//K6 = bsxfun(@times, model.alphas', K5)
+			temp[i] = modelAlphas[i] * temp[i];
+			
+			//p = sum(K6, 2)
+			p = p + temp[i];
+		}
+		
+		printArray(temp,groups);
+		printf("Decision Variable = %e \n", p);
+		
+		if(p > 0)
+			printf("Gunshot Detected \n");
+		else
+			printf("Noise Signal \n");
+		return p;
+	}
+
+
+	
