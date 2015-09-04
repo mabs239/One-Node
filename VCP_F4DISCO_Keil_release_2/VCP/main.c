@@ -15,6 +15,9 @@
 
 #include "HelperFunctions.h"
 
+//int f_size ;
+//int groups ;
+
 #define Rise_Const 12
 #define Fall_Const 2
 #define Samples 500
@@ -24,7 +27,7 @@
 #define Vs  333
 
 
-
+/*
 struct Model
 {
     double w [f_size];
@@ -33,7 +36,9 @@ struct Model
     double y[groups];
     double alphas [groups];
 };
+*/
 
+/*
 void array_Mult(double array[f_size],double x,double result[f_size],int size);
 void array_add(double array[f_size],double x,double result[f_size]);
 void array_square(double array[f_size],double result[f_size]);
@@ -46,6 +51,7 @@ void Matrix_int_sum(double array[groups][groups],double a,double result[groups][
 double gaussianKernel(double x1,double x2,double sigma);
 void Matrix(double array1[] , double array2[], double result[groups][groups],int size);
 void Mat_array_mult(double mat[groups][groups],double array[],double result[groups][groups],int size);
+*/
 
 void printArray(double a[], int len);
 //void Recieve();
@@ -53,7 +59,7 @@ void printArray(double a[], int len);
 //uint8_t getExtiFlag();
 
 
-void svm_predict(struct Model a , double sample[f_size]);
+//void svm_predict(struct Model a , double sample[f_size], int f_size);
 
 
 
@@ -93,6 +99,9 @@ int EdgeDefAngle[6]={330,30,90,150,210,270}; /////yet to be modified (Akif)
 /////Can be better approximated (Hakeem)
 uint8_t false_exti,timefirst=0;
 long int result=0;
+
+//double modelX[f_size][groups] ={{0.579000344, 0.796917226, 0.422056676, 0.237648833, 0.968937944, 0.770653925, 0.484163008 , 0.213185483	,0.219116214	,0.003703923	,0.000113883	,9.42E-05	,2.30E-06	,1.16E-06	,1.75E-07	,1.04E-08,	1.695387474,	2.271354862,	0.452291288,	0.227607391,	2.077405125,	2.313796625,	2.512395494,	2.580537307,	2.71198118,	2.506749483,	2.895398071	,2.110320158},
+//{0.157368421,	0.108947368,	0.104736842	,0.092105263,	0.075263158,	0.078421053,	0.076315789,	0.075263158,	0.051052632	,0.092105263,	0.05,	0.042631579	,0.045789474,	0.056315789	,0.022631579,	0.028421053,	0.058421053	,0.079473684,	0.092105263,	0.074210526,	0.134210526,	0.219473684,	0.171052632,	0.23,	0.120526316	,0.235263158,	0.118421053,	0.184736842}};
 
 
 //void printArray2D(int m, int n,double a[m][n]);
@@ -587,28 +596,20 @@ void Init_Recv_Node(){
 
 
 
-
-
-int main(void) {
-	__IO uint32_t i = 0, j =0;
-		double X[] = {.7,0.7};
+/**********************************************************************/
+/* 																																		*/
+/*																																		*/
+/**********************************************************************/
+int svmPredict(double X[])
+{
+		int i = 0, j =0;
+		//double X[] = {.7,0.7};
 		double X1;
 		double X2[groups], temp[groups];
 		double p = 0;
 		
-		/*
-		struct Model m1;
-		for (idx=0; idx<groups; idx++){
-			m1.alphas[idx] = alpha[idx];
-			m1.y[idx] = alpha[idx];
-			m1.X[idx][0] = X1[idx];
-			m1.X[idx][1] = X2[idx];
-		}	
-		m1.w[0] = w[0]; m1.w[1] = w[1];
-		m1.b = b;
-		*/
+		
 		printf("Bismillah Hir Rahman Nir Raheem \n");
-
 		for(j=0; j < f_size ; ++j)
 			X1 = X1 + X[j]*X[j];
 		
@@ -652,8 +653,28 @@ int main(void) {
 			printf("Gunshot Detected \n");
 		else
 			printf("Noise Signal \n");
+		return p;
+	}
 
+
+
+int main(void) {
+		/*
+		struct Model m1;
+		for (idx=0; idx<groups; idx++){
+			m1.alphas[idx] = alpha[idx];
+			m1.y[idx] = alpha[idx];
+			m1.X[idx][0] = X1[idx];
+			m1.X[idx][1] = X2[idx];
+		}	
+		m1.w[0] = w[0]; m1.w[1] = w[1];
+		m1.b = b;
+		*/
+		double X[] = {.7,0.7};
+		svmPredict(X);
+		
 		printf("Result of addition: %i",add239(3,4));	
+		
 		time_var1=0;
 		STM_EVAL_LEDInit(LED6);
 		STM_EVAL_LEDInit(LED4);
