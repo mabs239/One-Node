@@ -435,6 +435,11 @@
               <FileType>1</FileType>
               <FilePath>..\cc1101.c</FilePath>
             </File>
+            <File>
+              <FileName>HelperFunctions.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HelperFunctions.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
