@@ -3,6 +3,7 @@
 #include "HelperFunctions.h"
 #include "math.h"
 
+
 //int f_size = 2;
 //int groups = 28;
 
@@ -24,6 +25,34 @@ double modelW[] = {-10.93210935, -0.325816793};
 double modelB = 0.0116;
 int modelLength = 28;
 */
+
+
+/**********************************************************************/
+							/* Add code to view results in debug window														*/
+							/*																																		*/
+							/**********************************************************************/
+							 // Add ITM Port register definitions to the source code.
+
+				
+							FILE __stdout;
+							FILE __stdin;
+
+							int fputc(int ch, FILE *f) {
+								if (DEMCR & TRCENA) {
+									while (ITM_Port32(0) == 0);
+									ITM_Port8(0) = ch;
+								}
+								return(ch);
+							}
+
+							//Add a debugging trace messages using printf.
+							//printf("AD value = 0x%04X\r\n", AD_value);
+
+							/**********************************************************************/
+							/* Above code is useful for debug printf function.										*/
+							/**********************************************************************/
+
+
 
 /**********************************************************************/
 /* 																																		*/
@@ -63,6 +92,15 @@ void printArray(double a[], int len)
 	printf("\r\n");
 }
 
+void printArrayF(float a[], int len)
+{
+	int i = 0;
+	printf("\r\n");
+	for(i=0;i<len;i++){
+		printf(" %e ",a[i]);
+	}
+	printf("\r\n");
+}
 /**********************************************************************/
 /* 																																		*/
 /*																																		*/

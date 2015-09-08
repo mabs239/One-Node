@@ -4,6 +4,7 @@
 int add239(int x, int y);
 double gaussianKernel(double x1,double x2,double sigma);
 void printArray(double a[], int len);
+void printArrayF(float a[], int len);
 void printArray2D(int m, int n,double a[3][3]);
 int svmPredict(double X[]);
 
@@ -19,6 +20,19 @@ extern double modelW[];
 extern double modelB;
 extern int modelLength;
 
+
+
+
+			#define ITM_Port8(n)    (*((volatile unsigned char *)(0xE0000000+4*n)))
+							#define ITM_Port16(n)   (*((volatile unsigned short*)(0xE0000000+4*n)))
+							#define ITM_Port32(n)   (*((volatile unsigned long *)(0xE0000000+4*n)))
+
+							#define DEMCR           (*((volatile unsigned long *)(0xE000EDFC)))
+							#define TRCENA          0x01000000
+
+							//Add an fputc function to the source code that writes to the ITM Port 0 register. The fputc function enables printf to output messages.
+
+							struct __FILE { int handle; /* Add whatever is needed */ };
 
 /*
 const int f_size = 2;

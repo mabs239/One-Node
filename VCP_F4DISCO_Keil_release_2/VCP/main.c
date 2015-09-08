@@ -15,6 +15,10 @@
 
 #include "HelperFunctions.h"
 
+
+#include "arm_math.h" 
+#include "math_helper.h"	
+
 //int f_size ;
 //int groups ;
 
@@ -106,41 +110,7 @@ long int result=0;
 
 //void printArray2D(int m, int n,double a[m][n]);
 //void printArray2D(int m, int n,double **a);
-							/**********************************************************************/
-							/* Add code to view results in debug window														*/
-							/*																																		*/
-							/**********************************************************************/
-							 // Add ITM Port register definitions to the source code.
-
-							#define ITM_Port8(n)    (*((volatile unsigned char *)(0xE0000000+4*n)))
-							#define ITM_Port16(n)   (*((volatile unsigned short*)(0xE0000000+4*n)))
-							#define ITM_Port32(n)   (*((volatile unsigned long *)(0xE0000000+4*n)))
-
-							#define DEMCR           (*((volatile unsigned long *)(0xE000EDFC)))
-							#define TRCENA          0x01000000
-
-							//Add an fputc function to the source code that writes to the ITM Port 0 register. The fputc function enables printf to output messages.
-
-							struct __FILE { int handle; /* Add whatever is needed */ };
-							FILE __stdout;
-							FILE __stdin;
-
-							int fputc(int ch, FILE *f) {
-								if (DEMCR & TRCENA) {
-									while (ITM_Port32(0) == 0);
-									ITM_Port8(0) = ch;
-								}
-								return(ch);
-							}
-
-							//Add a debugging trace messages using printf.
-							//printf("AD value = 0x%04X\r\n", AD_value);
-
-							/**********************************************************************/
-							/* Above code is useful for debug printf function.										*/
-							/**********************************************************************/
-
-
+							
 void USART_puts(USART_TypeDef* USARTx, volatile int s) /// Dosri file (Usart)
 {
 		// wait until data register is empty
@@ -597,28 +567,122 @@ void Init_Recv_Node(){
 
 
 
+
+
+#define USE_STATIC_INIT 
+ 
+ /* ---------------------------------------------------------------------- 
+** Global defines  
+** ------------------------------------------------------------------- */ 
+ 
+#define TEST_LENGTH_SAMPLES 	(20*4) 
+ 
+/* ---------------------------------------------------------------------- 
+** List of Marks scored by 20 students for 4 subjects 
+** ------------------------------------------------------------------- */  
+const float32_t testMarks_f32[TEST_LENGTH_SAMPLES] =  
+{    
+	42.000000,	37.000000,	81.000000,	28.000000,	 
+	83.000000,	72.000000,	36.000000,	38.000000,	 
+	32.000000,	51.000000,	63.000000,	64.000000,	 
+	97.000000,	82.000000,	95.000000,	90.000000,	 
+	66.000000,	51.000000,	54.000000,	42.000000,	 
+	67.000000,	56.000000,	45.000000,	57.000000,	 
+	67.000000,	69.000000,	35.000000,	52.000000,	 
+	29.000000,	81.000000,	58.000000,	47.000000,	 
+	38.000000,	76.000000,	100.000000,	29.000000,	 
+	33.000000,	47.000000,	29.000000,	50.000000,	 
+	34.000000,	41.000000,	61.000000,	46.000000,	 
+	52.000000,	50.000000,	48.000000,	36.000000,	 
+	47.000000,	55.000000,	44.000000,	40.000000,	 
+	100.000000,	94.000000,	84.000000,	37.000000,	 
+	32.000000,	71.000000,	47.000000,	77.000000,	 
+	31.000000,	50.000000,	49.000000,	35.000000,	 
+	63.000000,	67.000000,	40.000000,	31.000000,	 
+	29.000000,	68.000000,	61.000000,	38.000000,	 
+	31.000000,	28.000000,	28.000000,	76.000000,	 
+	55.000000,	33.000000,	29.000000,	39.000000 
+};  
+ 
+ 
+/* ---------------------------------------------------------------------- 
+* Number of subjects X 1  
+* ------------------------------------------------------------------- */  
+const float32_t testUnity_f32[4] =  
+{    
+	1.000,  1.000, 	1.000,  1.000 
+}; 
+ 
+ 
+/* ---------------------------------------------------------------------- 
+** f32 Output buffer 
+** ------------------------------------------------------------------- */  
+static float32_t testOutput[TEST_LENGTH_SAMPLES]; 
+ 
+ 
+/* ------------------------------------------------------------------ 
+* Global defines  
+*------------------------------------------------------------------- */ 
+#define 	NUMSTUDENTS  20 
+#define     NUMSUBJECTS  4 
+ 
+/* ------------------------------------------------------------------ 
+* Global variables  
+*------------------------------------------------------------------- */ 
+ 
+uint32_t  	numStudents = 20; 
+uint32_t  	numSubjects = 4;  
+//float32_t	max_marks, min_marks, mean, std; 
+float	max_marks, min_marks, mean, std; 
+uint32_t 	student_num;    
+ 
+/* ---------------------------------------------------------------------------------- 
+* Main f32 test function.  It returns maximum marks secured and student number 
+* ------------------------------------------------------------------------------- */ 
+
+
+
+
+
+
+
+
+
 int main(void) {
-		/*
-		struct Model m1;
-		for (idx=0; idx<groups; idx++){
-			m1.alphas[idx] = alpha[idx];
-			m1.y[idx] = alpha[idx];
-			m1.X[idx][0] = X1[idx];
-			m1.X[idx][1] = X2[idx];
-		}	
-		m1.w[0] = w[0]; m1.w[1] = w[1];
-		m1.b = b;
-		*/
 		double X[] = {.7,0.7};
-		svmPredict(X);
+		int idx;
+
+  	arm_matrix_instance_f32 srcA; 
+  	arm_matrix_instance_f32 srcB; 
+  	arm_matrix_instance_f32 dstC;  
+ 
+	/* Input and output matrices initializations */  
+	arm_mat_init_f32(&srcA, numStudents, numSubjects, (float32_t *)testMarks_f32);  
+	arm_mat_init_f32(&srcB, numSubjects, 1, (float32_t *)testUnity_f32);  
+	arm_mat_init_f32(&dstC, numStudents, 1, testOutput);  
 		
+		arm_mat_mult_f32(&srcA, &srcB, &dstC); 
+		arm_max_f32(testOutput, numStudents, &max_marks, &student_num);  
+		arm_min_f32(testOutput, numStudents, &min_marks, &student_num);  
+		arm_mean_f32(testOutput, numStudents, &mean); 
+		arm_std_f32(testOutput, numStudents, &std); 
+		
+		svmPredict(X);
 		printf("Result of addition: %i",add239(3,4));	
+	
+		for(idx = 0; idx <30; idx ++ )
+			printf("\n Max Marks: %f",testOutput[idx]);	
+			
+			printf("\n Students:%i, Max=%f, Min=%f, Mean=%f, Std=%f",student_num, max_marks, min_marks, mean, std);	
+	
 		
 		time_var1=0;
 		STM_EVAL_LEDInit(LED6);
 		STM_EVAL_LEDInit(LED4);
 		Init_Recv_Node();
 
+
+				
 		/*Angle31=0x33;	
 		USART_puts(USART2,0x35);
 		USART_puts(USART2,'\n');*/

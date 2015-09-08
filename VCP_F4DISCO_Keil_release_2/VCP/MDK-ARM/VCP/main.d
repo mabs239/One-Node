@@ -58,3 +58,8 @@
 .\vcp\main.o: ..\three_adcs_nwn.h
 .\vcp\main.o: ..\uart.h
 .\vcp\main.o: ..\HelperFunctions.h
+.\vcp\main.o: ..\..\..\Libraries\CMSIS\Include\arm_math.h
+.\vcp\main.o: ..\..\..\Libraries\CMSIS\Include\ARMCM4.h
+.\vcp\main.o: ..\..\..\Libraries\CMSIS\Include\core_cm4.h
+.\vcp\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\vcp\main.o: ..\..\..\Libraries\CMSIS\DSP_Lib\Examples\Common\Include\math_helper.h

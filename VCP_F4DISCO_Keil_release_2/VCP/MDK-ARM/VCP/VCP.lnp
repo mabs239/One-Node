@@ -40,6 +40,7 @@
 ".\vcp\usbd_desc.o"
 ".\vcp\usbd_cdc_core.o"
 ".\vcp\usbd_cdc_vcp.o"
+"..\..\..\Libraries\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib"
 --library_type=microlib --strict --scatter ".\VCP\VCP.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
